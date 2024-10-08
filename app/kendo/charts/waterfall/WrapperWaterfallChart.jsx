@@ -1,4 +1,4 @@
-import WaterfallChartContainer from '~/kendo/charts/waterfall/kendoWaterfallChart.client'
+import WaterfallChartContainer from '@/app/kendo/charts/waterfall/kendoWaterfallChart.client'
 
 
 const Fallback = () => {

@@ -74,11 +74,11 @@ export function StockOut({ props: { productGroup } }) {
       <h2 className="text-base font-medium text-gray-900">
         Product Group - {productGroup}
       </h2>
-      <ul className="p-4 grid grid-cols-1 gap-2 list-disc">
+      {/* <ul className="p-4 grid grid-cols-1 gap-2 list-disc">
         <li>1</li>
         <li>1</li>
         <li>1</li>
-      </ul>
+      </ul> */}
 
       <div className="bg-white rounded-lg my-2">
         <DataTable data={tasks} columns={columns} />

@@ -36,7 +36,7 @@ export async function SidebarList({ userId }: SidebarListProps) {
         <Link href="" className="p-2 rounded-lg bg-blue-600 text-white">
           <Squares2X2Icon className="size-5 " aria-hidden="true" />
         </Link>
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </div>
     </div>
   )

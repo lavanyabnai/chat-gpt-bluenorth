@@ -4,7 +4,6 @@ import { scaleLinear } from 'd3-scale'
 import { subMonths, format } from 'date-fns'
 import { useResizeObserver } from 'usehooks-ts'
 import { useAIState } from 'ai/rsc'
-import { Button } from '@/components/ui/button'
 import {
   LightBulbIcon,
   WrenchScrewdriverIcon,
@@ -14,24 +13,17 @@ import {
 import Link from 'next/link'
 import CardLayoutChat from '@/components/CardLayoutChat'
 import { kpiService_m } from '@/app/data/dashboard/scmOverviewData'
+import SnopScenario from '@/components/scenario/SnopScenario'
+import SnopTruck from '../cleansheet/SnopTruck-chat'
 
-// interface Stock {
-//   symbol: string
-//   price: number
-//   delta: number
-// }
+interface KpiDashboardProps {
+  productGroup: string;
+}
 
-export function KpiDashboard({ props: { productGroup } }) {
+export function KpiDashboard({ props: { productGroup } }: { props: KpiDashboardProps }) {
   const [aiState, setAIState] = useAIState()
   const id = useId()
-  console.log('Inside Overall Perf')
-
-  //   const [priceAtTime, setPriceAtTime] = useState({
-  //     time: '00:00',
-  //     value: price.toFixed(2),
-  //     x: 0
-  //   })
-
+  
   const [startHighlight, setStartHighlight] = useState(0)
   const [endHighlight, setEndHighlight] = useState(0)
 
@@ -45,10 +37,6 @@ export function KpiDashboard({ props: { productGroup } }) {
     [0, width],
     [subMonths(new Date(), 6), new Date()]
   )
-  //   const xToValue = scaleLinear(
-  //     [0, width],
-  //     [price - price / 2, price + price / 2]
-  //   )
 
   useEffect(() => {
     if (startHighlight && endHighlight) {
@@ -73,7 +61,7 @@ export function KpiDashboard({ props: { productGroup } }) {
         })
       }
     }
-  }, [startHighlight, endHighlight])
+  }, [startHighlight, endHighlight, id, xToDate, aiState, setAIState])
 
   return (
     <div className=" text-gray-800 dark:text-white">
@@ -85,7 +73,8 @@ export function KpiDashboard({ props: { productGroup } }) {
         <li key={2}>OTIF has improved by 4%</li>
         <li key={3}>Inventory has decreased by 7%</li>
       </ul>
-
+      {/* <SnopScenario/> */}
+      {/* <SnopTruck/> */}
       <CardLayoutChat kpiData={kpiService_m} />
 
       <div className="mt-2 p-2 bg-white rounded-lg border">

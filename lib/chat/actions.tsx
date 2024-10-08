@@ -24,7 +24,6 @@ import { EventsSkeleton } from '@/components/stocks/events-skeleton'
 import { Events } from '@/components/stocks/events'
 import { StocksSkeleton } from '@/components/stocks/stocks-skeleton'
 import { Stocks } from '@/components/stocks/stocks'
-import { StockSkeleton } from '@/components/stocks/stock-skeleton'
 import { OverallSkeleton } from '@/components/stocks/overall-skeleton'
 import { OverallPerf } from '@/components/stocks/overall-perf'
 import { Backorder } from '@/components/stocks/backorder'
@@ -33,6 +32,8 @@ import { StockOut } from '@/components/stocks/stockout'
 import { StockoutSkeleton } from '@/components/stocks/stockout-skeleton'
 import { KpiDashboard } from '@/components/stocks/kpidashboard'
 import { KpidashboardSkeleton } from '@/components/stocks/kpidashboard-skeleton'
+import { InputDashboard } from '@/components/stocks/input'
+import { InputDashboardSkeleton } from '@/components/stocks/input-skeleton'
 import {
   formatNumber,
   runAsyncFnWithoutBlocking,
@@ -170,6 +171,8 @@ async function submitUserMessage(content: string) {
         If you want to show SKUs that are out of stock or low on stock for the product group call \`showStockout\`.
 
         If you want to show Key KPI Dashboard for all product groups and SKUs call \`kpiDashboard\`.
+
+        If you want to show input that are and input call \`inputDashboard\`.
        
         Besides that, you can also chat with users and do some calculations if needed.`
       },
@@ -359,6 +362,46 @@ async function submitUserMessage(content: string) {
             <BotCard>
               {/* <Stock props={{ symbol, price, delta }} /> */}
               <KpiDashboard props={{ productGroup }} />
+            </BotCard>
+          )
+        }
+      },
+      inputDashboard: {
+        description:
+          'what are the product inputDashboard',
+        parameters: z.object({
+          productGroup: z
+            .string()
+            .describe(
+              'The name of product group e.g. Construction/Paint/Gardening.'
+            )
+        }),
+        render: async function* ({ productGroup }) {
+          yield (
+            <BotCard>
+              <InputDashboardSkeleton />
+            </BotCard>
+          )
+
+          await sleep(1000)
+
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: nanoid(),
+                role: 'function',
+                name: 'inputDashboard',
+                content: JSON.stringify(productGroup)
+              }
+            ]
+          })
+
+          return (
+            <BotCard>
+              {/* <Stock props={{ symbol, price, delta }} /> */}
+              <InputDashboard props={{ productGroup }} />
             </BotCard>
           )
         }
@@ -649,6 +692,10 @@ export const getUIStateFromAIState = (aiState: Chat) => {
               <KpiDashboard props={JSON.parse(message.content)} />
             </BotCard>
           ) : message.name === 'showStockPurchase' ? (
+            <BotCard>
+              <Purchase props={JSON.parse(message.content)} />
+            </BotCard>
+          ) : message.name === 'inputDashboard' ? (
             <BotCard>
               <Purchase props={JSON.parse(message.content)} />
             </BotCard>

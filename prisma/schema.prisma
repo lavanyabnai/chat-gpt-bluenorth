@@ -1,0 +1,261 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  notes     Note[]
+  password  Password?
+}
+
+model Password {
+  hash   String
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PlanInput {
+  id                    Int       @id @default(autoincrement())
+  customer              String
+  site                  String
+  sku                   String
+  Jan                   Int?
+  Feb                   Int?
+  Mar                   Int?
+  Apr                   Int?
+  May                   Int?
+  Jun                   Int?
+  Jul                   Int?
+  Aug                   Int?
+  Sep                   Int?
+  Oct                   Int?
+  Nov                   Int?
+  Dec                   Int?
+  material_cost_pu      Int?
+  inv_hold_cost_pupm    Int?
+  stockout_cost_pupm    Int?
+  hiring_cost_pw        Int?
+  firing_cost_pw        Int?
+  labor_hrs_pu          Int?
+  worker_cost_pm        Int?
+  overtime_cost_phr     Int?
+  outsourcing_cost_pu   Int?
+  max_work_hrs_pwpm     Int?
+  max_overtime_hrs_pwpm Int?
+  inventory_start       Int?
+  inventory_end         Int?
+  backlog_start         Int?
+  backlog_end           Int?
+  num_workers_start     Int?
+  min_end_workers       Int?
+  max_end_workers       Int?
+  CreatedAt             DateTime? @default(now())
+
+  @@map("PLAN_INPUT")
+}
+
+model SnopScenario {
+  id                    Int       @id @default(autoincrement())
+  scenario_id           String?
+  description           String?
+  CreatedAt             DateTime? @default(now())
+  UpdatedAt             DateTime? @default(now())
+  module                String?   @default("Sales & Operations Planning")
+  Status                String?
+  customer              String
+  site                  String
+  sku                   String
+  Jan                   Int?
+  Feb                   Int?
+  Mar                   Int?
+  Apr                   Int?
+  May                   Int?
+  Jun                   Int?
+  Jul                   Int?
+  Aug                   Int?
+  Sep                   Int?
+  Oct                   Int?
+  Nov                   Int?
+  Dec                   Int?
+  material_cost_pu      Int?
+  inv_hold_cost_pupm    Int?
+  stockout_cost_pupm    Int?
+  hiring_cost_pw        Int?
+  firing_cost_pw        Int?
+  labor_hrs_pu          Int?
+  worker_cost_pm        Int?
+  overtime_cost_phr     Int?
+  outsourcing_cost_pu   Int?
+  max_work_hrs_pwpm     Int?
+  max_overtime_hrs_pwpm Int?
+  inventory_start       Int?
+  inventory_end         Int?
+  backlog_start         Int?
+  backlog_end           Int?
+  num_workers_start     Int?
+  min_end_workers       Int?
+  max_end_workers       Int?
+
+  @@map("SNOP_SCENARIO")
+}
+
+model snop_archive {
+  id                    Int       @id @default(autoincrement())
+  scenario_id           String?
+  description           String?
+  CreatedAt             DateTime? @default(now())
+  UpdatedAt             DateTime? @default(now())
+  module                String?   @default("Sales & Operations Planning")
+  Status                String?
+  customer              String
+  site                  String
+  sku                   String
+  Jan                   Int?
+  Feb                   Int?
+  Mar                   Int?
+  Apr                   Int?
+  May                   Int?
+  Jun                   Int?
+  Jul                   Int?
+  Aug                   Int?
+  Sep                   Int?
+  Oct                   Int?
+  Nov                   Int?
+  Dec                   Int?
+  material_cost_pu      Int?
+  inv_hold_cost_pupm    Int?
+  stockout_cost_pupm    Int?
+  hiring_cost_pw        Int?
+  firing_cost_pw        Int?
+  labor_hrs_pu          Int?
+  worker_cost_pm        Int?
+  overtime_cost_phr     Int?
+  outsourcing_cost_pu   Int?
+  max_work_hrs_pwpm     Int?
+  max_overtime_hrs_pwpm Int?
+  inventory_start       Int?
+  inventory_end         Int?
+  backlog_start         Int?
+  backlog_end           Int?
+  num_workers_start     Int?
+  min_end_workers       Int?
+  max_end_workers       Int?
+
+  @@map("SNOP_ARCHIVE")
+}
+
+model truck_scenario {
+  id                   Int     @id @default(autoincrement())
+  origin               String?
+  destination          String?
+  distance             String?
+  backhaul             String?
+  purchase_cost        Int?
+  mileage_with_load    Int?
+  mileage_without_load Int?
+  maintenance          Int?
+  capacity             Int?
+  annual_distance      Int?
+  life                 Int?
+  diesel_price         Int?
+  loading_unloading    Int?
+  toll                 Int?
+  route_expenses       Int?
+  driver_expenses      Int?
+  tyres                Int?
+  bucket               String?
+
+  @@map("TRUCK_SCENARIO")
+}
+
+model truck_details {
+  id                        Int     @id @default(autoincrement())
+  truck_type                String?
+  truck_cost                Int?
+  fab_cost                  Int?
+  total_cost                Int?
+  resale_value              Int?
+  net_total_cost            Int?
+  life                      Int?
+  capacity                  Int?
+  dis_covered_per_yr        Int?
+  dis_covered_with_load     Int?
+  insurance_cost            Int?
+  permits_for_truck         Int?
+  emi_interest              Int?
+  road_tax_truck            Int?
+  reg_fc_renewal            Int?
+  total_fixed_cost          Int?
+  mileage_with_load         Int?
+  mileage_without_load      Int?
+  diesel_cost               Int?
+  num_of_tyres              Int?
+  tyres_cost                Int?
+  oil_cost                  Int?
+  maintenance_cost          Int?
+  loading_cost_per_trip     Int?
+  loading_unloading_cost    Int?
+  toll_expenses_inr         Int?
+  toll_expenses             Int?
+  rto_pc_check_post_inr     Int?
+  rto_pc_check_post         Int?
+  total_variable_cost       Int?
+  driver_cleaner_salary     Int?
+  driver_cleaner_batta      Int?
+  gen_admin_exp             Int?
+  total_admin_expenses      Int?
+  return_sale               Int?
+  re_operating_cost_yrs     Int?
+  re_operating_cost_trip    Int?
+  workable_freight_per_trip Int?
+  cost_per_bike             Int?
+  dis_coverd_empty          Int?
+
+  @@map("TRUCK_DETAILS")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model snop_incidents {
+  id          Unsupported("int auto_increment")? @id
+  incident_id String?
+  status      String?
+  priority    String?
+  ticket_type String?
+  description String?
+
+  @@map("SNOP_INCIDENTS")
+  @@ignore
+}
+
+model snop_truckoutput {
+  id                  Int  @id @default(autoincrement())
+  variable_cost_trip  Int?
+  fixed_cost_trip     Int?
+  admin_cost_per_trip Int?
+  return_sale_trip    Int?
+  variable_cost       Int?
+  fixed_cost          Int?
+  admin_cost          Int?
+  profit_unit         Int?
+
+  @@map("SNOP_TRUCKOUTPUT")
+}

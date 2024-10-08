@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-
 import { ServerActionResult } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,7 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { IconSpinner } from '@/components/ui/icons'
+import { IconSpinner, IconShare, IconTrash } from '@/components/ui/icons'
 
 interface ClearHistoryProps {
   isEnabled: boolean
@@ -37,7 +36,9 @@ export function ClearHistory({
       <AlertDialogTrigger asChild>
         <Button className="bg-blue-600" disabled={!isEnabled || isPending}>
           {isPending && <IconSpinner className="mr-2" />}
-          Delete Chats
+          <IconTrash
+            className='text-white'
+          />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
