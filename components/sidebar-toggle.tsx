@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useSidebar } from '@/lib/hooks/use-sidebar'
 import { Button } from '@/components/ui/button'
 import { IconSidebar } from '@/components/ui/icons'
-
+import logo from '@/public/assets/logo.png'
 export function SidebarToggle() {
   const { toggleSidebar } = useSidebar()
 
@@ -18,7 +18,7 @@ export function SidebarToggle() {
     >
       <Image
         className="mx-auto p-1"
-        src="/assets/logo.png"
+        src={logo}
         alt="logo"
         width={40}
         height={40}

@@ -1,5 +1,4 @@
-import { ColumnColorChartContainer } from "~/kendo/charts/columnColor/kendoColumnColorChart.client";
-
+import { ColumnColorChartContainerChat } from '@/app/kendo/charts/columnColorchat/kendoColumnColorChat.client'
 
 const Fallback = () => {
     return <div>
@@ -15,12 +14,12 @@ const Fallback = () => {
     </div>;
   };
 
-export default function WrapperMultiColumnColorChart({seriesData}){
-    return typeof document !== "undefined" ? (
-      <ColumnColorChartContainer seriesData={seriesData} />
-    ) : (
-      <Fallback />
-    );
+export default function WrapperMultiColumnColorChart({ category, series }) {
+  return typeof document !== 'undefined' ? (
+    <ColumnColorChartContainerChat categories={category} series={series} />
+  ) : (
+    <Fallback />
+  )
 }
 
 // export function WrapperQuadColumnChart({category, first, second, third, fourth,name}){

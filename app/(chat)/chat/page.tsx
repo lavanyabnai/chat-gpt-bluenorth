@@ -3,10 +3,10 @@ import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
 import { auth } from '@/auth'
 import { Session } from '@/lib/types'
-import { getMissingKeys } from '../actions'
+import { getMissingKeys } from '../../actions'
 
 export const metadata = {
-  title: 'BlueNorth AI EnterpriseGPT',
+  title: 'BlueNorth AI EnterpriseGPT'
 }
 
 export default async function IndexPage() {

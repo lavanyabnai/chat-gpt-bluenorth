@@ -1,4 +1,4 @@
-import { ColumnColorChartContainer } from "~/kendo/charts/columnColor/kendoColumnColorChart.client";
+import { ColumnColorChartContainer } from "@/app/kendo/charts/columnColor/kendoColumnColorChart.client";
 
 
 const Fallback = () => {
@@ -15,27 +15,12 @@ const Fallback = () => {
     </div>;
   };
 
-export default function WrapperMultiColumnColorChart({ category, series }) {
-  return typeof document !== "undefined" ? (
-    <ColumnColorChartContainer categories={category} series={series} />
-  ) : (
-    <Fallback />
-  );
+export default function WrapperMultiColumnColorChart({seriesData}){
+    return typeof document !== "undefined" ? (
+      <ColumnColorChartContainer seriesData={seriesData} />
+    ) : (
+      <Fallback />
+    );
 }
 
-// export function WrapperQuadColumnChart({category, first, second, third, fourth,name}){
-//     return typeof document !== "undefined" ? <QuadColumnChartContainer categories={category} firstSeries={first} secondSeries={second} thirdSeries={third} fourthSeries={fourth} name={name}/> : <Fallback />
-// }  
-
-// export function WrapperTripleColumnChart({category, first, second, third,name}){
-//     return typeof document !== "undefined" ? <TripleColumnChartContainer categories={category} firstSeries={first} secondSeries={second} thirdSeries={third} name={name}/> : <Fallback />
-// }
-
-// export function WrapperDoubleColumnChart({category, first, second,name}){
-//   return typeof document !== "undefined" ? <DoubleColumnChartContainer categories={category} firstSeries={first} secondSeries={second} name={name}/> : <Fallback />
-// }
-
-// export function WrapperSingleColumnChart({category, first,name}){
-//   return typeof document !== "undefined" ? <SingleColumnChartContainer categories={category} firstSeries={first} name={name}/> : <Fallback />
-// }
 

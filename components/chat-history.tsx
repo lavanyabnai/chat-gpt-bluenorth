@@ -16,7 +16,7 @@ export async function ChatHistory({ userId }: ChatHistoryProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between p-4  ">
         <h4 className="text-lg font-semibold">Chat History</h4>
-        <Link href="/">
+        <Link href="/chat">
           <div className="relative flex  size-10 items-center  justify-center rounded-full">
             <div className="flex items-center justify-center  rounded-full bg-gradient-to-t from-indigo-400 via-cyan-400 to-sky-500 shadow-lg p-0.5">
               <IconPlus className="mx-auto bg-white dark:bg-black dark:text-white  size-8 justify-center rounded-full p-1.5 stroke-5" />
