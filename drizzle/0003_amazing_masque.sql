@@ -1,0 +1,1 @@
+ALTER TABLE "product_flows" ALTER COLUMN "product_unit" DROP NOT NULL;

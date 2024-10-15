@@ -28,6 +28,7 @@ import { BsBoxes } from 'react-icons/bs';
 import { GrTree } from 'react-icons/gr';
 import { MdInventory } from 'react-icons/md';
 import Image from 'next/image';
+import { ThemeToggle } from './theme-toggle';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -136,7 +137,7 @@ export default function SidebarShadcn({
       </div>
 
       <nav className="grid gap-1 p-2">
-        {sidebarMenu?.map((item) => (
+        {sidebarMenu?.map(item => (
           <TooltipProvider key={item.to}>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -188,7 +189,7 @@ export default function SidebarShadcn({
         ))} */}
         <Menubar className="border-none">
           <MenubarMenu>
-            <MenubarTrigger className="flex items-center border-none">
+            <MenubarTrigger className="">
               <a
                 className="text-primary-foreground"
                 aria-label="Supply Chain Modules"
@@ -198,7 +199,7 @@ export default function SidebarShadcn({
             </MenubarTrigger>
             <MenubarContent>
               <div className="grid grid-cols-3 w-[700px] gap-2">
-                {dropdown.map((item) => (
+                {dropdown.map(item => (
                   <MenubarItem key={item.name}>
                     <Link href={item.to}>
                       <div className="rounded-lg hover:bg-gradient-to-t hover:from-indigo-400 hover:via-cyan-400 hover:to-sky-500 p-0.5">
@@ -229,7 +230,8 @@ export default function SidebarShadcn({
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
+        <ThemeToggle />
       </nav>
     </aside>
-  );
+  )
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "demand" ALTER COLUMN "parameters" DROP NOT NULL;

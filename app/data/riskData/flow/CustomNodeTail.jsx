@@ -1,8 +1,6 @@
 import { memo } from 'react'
 import { Handle } from '@xyflow/react'
 import Link from 'next/link'
-import { ProgressBar } from '@progress/kendo-react-progressbars'
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -10,14 +8,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   LightBulbIcon,
   WrenchScrewdriverIcon,
-  CircleStackIcon,
+  CircleStackIcon
 } from '@heroicons/react/24/outline'
 import {
   Table,
@@ -27,47 +23,47 @@ import {
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from '@/components/ui/table'
+import { Position } from '@xyflow/react'
+
 const invoices = [
   {
     name: 'Carrying Cost',
     value: '89.35',
-    unit: 'USD',
+    unit: 'USD'
   },
   {
     name: 'Opportunity Cost',
     value: '7,993.23',
-    unit: 'USD',
+    unit: 'USD'
   },
   {
     name: 'Profit',
     value: '63,344,372.18',
-    unit: 'USD',
+    unit: 'USD'
   },
   {
     name: 'Revenue',
     value: '98,280,000.0',
-    unit: 'USD',
+    unit: 'USD'
   },
   {
     name: 'Total Cost',
     value: '34,935,627.82',
-    unit: 'USD',
+    unit: 'USD'
   },
   {
     name: 'Transportation Cost',
     value: '5,760,238.47',
-    unit: 'USD',
-  },
+    unit: 'USD'
+  }
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 function CustomNode({ data }) {
-    const emptyStyles = { background: '#ef4444' }
-    const progressStyles = { background: '#22c55e' }
   return (
     <>
       <li
@@ -149,7 +145,7 @@ function CustomNode({ data }) {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {invoices.map((invoice) => (
+                        {invoices.map(invoice => (
                           <TableRow key={invoice.name}>
                             <TableCell>{invoice.name}</TableCell>
                             <TableCell>{invoice.value}</TableCell>
@@ -165,8 +161,16 @@ function CustomNode({ data }) {
           </div>
         </div>
       </li>
-      <Handle type="source" position="right" className="w-1 bg-teal-500" />
-      <Handle type="target" position="left" className="w-1 bg-teal-500" />
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="w-1 bg-teal-500"
+      />
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="w-1 bg-teal-500"
+      />
       {/* <div className="p-2 w-52 shadow-md rounded-md bg-sky-50 border-2 border-stone-400 ">
         <div className="flex justify-center items-center ">
           <div
@@ -188,5 +192,3 @@ function CustomNode({ data }) {
 }
 
 export default memo(CustomNode)
-
- 
