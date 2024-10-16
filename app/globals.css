@@ -6,6 +6,15 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #bae6fd;
+  border-radius: 5px;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -35,7 +44,6 @@ html, body, #__next {
 
 @layer base {
  :root {
- 
    --background: 220 100% 20%; /* blue-900 */
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -93,6 +101,9 @@ html, body, #__next {
 
 
 @layer base {
+   [inert] ::-webkit-scrollbar {
+    display: none;
+  }
   * {
     @apply border-border;
   }

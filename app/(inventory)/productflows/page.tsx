@@ -28,9 +28,8 @@ export default function ProductFlowsPage() {
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
   const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
 
-
   // const onUpload = (results: typeof INITIAL_IMPORT_RESULTS) => {
-    
+
   //   setImportResults(results);
   //   setVariant(VARIANTS.IMPORT);
   // };
@@ -53,60 +52,59 @@ export default function ProductFlowsPage() {
   //   //   return toast.error('Please select an account to continue.');
   //   // }
 
-    // const data = values.map((value) => ({
-    //   ...value
-    //   // accountId: accountId as string
-    // }));
-    
+  // const data = values.map((value) => ({
+  //   ...value
+  //   // accountId: accountId as string
+  // }));
 
-    //   createcoglocation.mutate(data, {
-    //     onSuccess: () => {
-    //       onCancelImport();
-    //     }
-    //   });
-    // };
+  //   createcoglocation.mutate(data, {
+  //     onSuccess: () => {
+  //       onCancelImport();
+  //     }
+  //   });
+  // };
 
-    if (productflowQuery.isLoading) {
-      return (
-        <div className="max-w-screen-6xl mx-auto w-full pb-10 -mt-24">
-          <Card className="border-none drop-shadow-sm">
-            <CardHeader>
-              <Skeleton className="h-8 w-48" />
-            </CardHeader>
-            <CardContent>
-              <div className="h-[500px] w-full flex items-center justify-center">
-                <Loader2 className="size-6 text-slate-300 animate-spin" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      );
+  if (productflowQuery.isLoading) {
+    return (
+      <div className="max-w-screen-6xl mx-auto w-full pb-10 -mt-24">
+        <Card className="border-none drop-shadow-sm">
+          <CardHeader>
+            <Skeleton className="h-8 w-48" />
+          </CardHeader>
+          <CardContent>
+            <div className="h-[500px] w-full flex items-center justify-center">
+              <Loader2 className="size-6 text-slate-300 animate-spin" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (variant === VARIANTS.IMPORT) {
+    function onSubmitImport(data: any): void {
+      throw new Error('Function not implemented.');
     }
 
-    if (variant === VARIANTS.IMPORT) {
-      function onSubmitImport(data: any): void {
-        throw new Error('Function not implemented.');
-      }
-
-      return (
-        <>
-          {/* <AccountDialog /> */}
-          <ImportCard
-            data={importResults.data}
-            onCancel={onCancelImport}
-            onSubmit={onSubmitImport}
-          />
-        </>
-      );
-    }
+    return (
+      <>
+        {/* <AccountDialog /> */}
+        <ImportCard
+          data={importResults.data}
+          onCancel={onCancelImport}
+          onSubmit={onSubmitImport}
+        />
+      </>
+    );
+  }
 
   return (
-      <div className="max-w-screen-6xl mx-auto">
-        <div className="flex flex-col  h-[58px] lg:flex-row lg:items-center lg:justify-between">
-          <CardTitle className="text-xl line-clamp-1 p-4">
-            Product Flow List
-          </CardTitle>
-          {/* <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
+    <div className="max-w-screen-6xl mx-auto">
+      <div className="flex flex-col  h-[58px] lg:flex-row lg:items-center lg:justify-between">
+        <CardTitle className="text-xl line-clamp-1 p-4">
+          Product Flow List
+        </CardTitle>
+        {/* <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
           <Button
               onClick={newLocation.onOpen}
             size="sm"
@@ -117,24 +115,23 @@ export default function ProductFlowsPage() {
           </Button>
           <UploadButton onUpload={onUpload} />
         </div> */}
-        </div>
-        <Separator />
-        <div className="px-4">
-          <DataTable
-            filterKey="name"
-            columns={columns}
-            data={productflowQuery.data}
-            // onDelete={(row) => {
-            //     const ids = row.map((r) => r.original.id);
-            //     deletecoglocation.mutate({ ids });
-            //   }}
-            disabled={isDisabled}
-            onDelete={function (
-            ): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
-        </div>
       </div>
-    );
-  }
+      <Separator />
+      <div className="px-4">
+        <DataTable
+          filterKey="name"
+          columns={columns}
+          data={productflowQuery.data}
+          // onDelete={(row) => {
+          //     const ids = row.map((r) => r.original.id);
+          //     deletecoglocation.mutate({ ids });
+          //   }}
+          disabled={isDisabled}
+          onDelete={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
+      </div>
+    </div>
+  );
+}

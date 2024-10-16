@@ -8,6 +8,7 @@ export const useGetDemands = () => {
     queryKey: ['demands'],
     queryFn: async () => {
       const response = await client.api.demands.$get();
+      console.log(response, 'response');
 
       if (!response.ok) {
         throw new Error('Failed to fetch demands');

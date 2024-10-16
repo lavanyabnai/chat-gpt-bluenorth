@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS "demand" (
 	"customer_id" integer NOT NULL,
 	"product_id" integer NOT NULL,
 	"demand_type" varchar(100) NOT NULL,
-	"parameters" jsonb NOT NULL,
+	"parameters" jsonb,
 	"time_period_id" integer NOT NULL,
 	"revenue" numeric(10, 2),
 	"down_penalty" numeric(10, 2) DEFAULT '0',
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS "demand" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "demand_coverage_by_distance" (
+CREATE TABLE IF NOT EXISTS "demand_coverage_by_distances" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"site_id" integer NOT NULL,
 	"site_name" varchar(255),
@@ -128,7 +128,25 @@ CREATE TABLE IF NOT EXISTS "demand_coverage_by_distance" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "distance_coverage_by_demand" (
+CREATE TABLE IF NOT EXISTS "demand_fulfillment" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"iteration" integer NOT NULL,
+	"period" integer NOT NULL,
+	"customer_id" integer,
+	"product_id" integer,
+	"unit" varchar(50) NOT NULL,
+	"demand_min" numeric(15, 2),
+	"demand_max" numeric(15, 2),
+	"satisfied" numeric(15, 2),
+	"percentage" numeric(5, 2),
+	"revenue_per_item" numeric(15, 2),
+	"revenue_total" numeric(15, 2),
+	"under_cost" numeric(15, 2),
+	"over_cost" numeric(15, 2),
+	"penalty" numeric(15, 2)
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "distance_coverage_by_demands" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"site_id" integer NOT NULL,
 	"site_name" varchar(255),
@@ -255,6 +273,7 @@ CREATE TABLE IF NOT EXISTS "paths" (
 	"from_location" varchar(255) NOT NULL,
 	"to_location" varchar(255) NOT NULL,
 	"cost_calculation_policy" varchar(50) NOT NULL,
+	"cost_pu_pk" numeric(10, 2) DEFAULT '0',
 	"cost_calculation_params" jsonb DEFAULT '{}',
 	"co2_calculation_params" jsonb DEFAULT '{}',
 	"currency" varchar(10),
@@ -304,9 +323,9 @@ CREATE TABLE IF NOT EXISTS "processing_costs" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "product_flows" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"label" varchar(255) NOT NULL,
-	"source_id" integer NOT NULL,
-	"destination_id" integer NOT NULL,
+	"label" varchar(255),
+	"source_id" integer,
+	"destination_id" integer,
 	"vehicle_type_id" integer,
 	"product_id" integer,
 	"expand_sources" boolean DEFAULT true,
@@ -316,7 +335,7 @@ CREATE TABLE IF NOT EXISTS "product_flows" (
 	"max_throughput" numeric(15, 2) DEFAULT '0',
 	"fixed" boolean DEFAULT false,
 	"fixed_value" numeric(15, 2),
-	"product_unit" varchar(50) NOT NULL,
+	"product_unit" varchar(50),
 	"down_penalty" numeric(15, 2) DEFAULT '0',
 	"up_penalty" numeric(15, 2) DEFAULT '0',
 	"currency" varchar(10),
@@ -326,7 +345,7 @@ CREATE TABLE IF NOT EXISTS "product_flows" (
 	"time_unit" varchar(50),
 	"time_period_id" integer,
 	"expand_periods" boolean DEFAULT true,
-	"inclusion_type" varchar(10) NOT NULL
+	"inclusion_type" varchar(10)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "product_group_products" (
@@ -371,7 +390,6 @@ CREATE TABLE IF NOT EXISTS "production" (
 	"label" varchar(255) NOT NULL,
 	"site_id" integer NOT NULL,
 	"product_id" integer NOT NULL,
-	"bom_id" integer,
 	"production_cost" numeric(15, 2),
 	"currency" varchar(10),
 	"min_throughput" numeric(15, 2) DEFAULT '0',
@@ -580,13 +598,25 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "demand_coverage_by_distance" ADD CONSTRAINT "demand_coverage_by_distance_site_id_facilities_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."facilities"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "demand_coverage_by_distances" ADD CONSTRAINT "demand_coverage_by_distances_site_id_facilities_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."facilities"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "distance_coverage_by_demand" ADD CONSTRAINT "distance_coverage_by_demand_site_id_facilities_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."facilities"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "demand_fulfillment" ADD CONSTRAINT "demand_fulfillment_customer_id_customers_id_fk" FOREIGN KEY ("customer_id") REFERENCES "public"."customers"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "demand_fulfillment" ADD CONSTRAINT "demand_fulfillment_product_id_products_id_fk" FOREIGN KEY ("product_id") REFERENCES "public"."products"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "distance_coverage_by_demands" ADD CONSTRAINT "distance_coverage_by_demands_site_id_facilities_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."facilities"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -790,12 +820,6 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "production" ADD CONSTRAINT "production_bom_id_bom_id_fk" FOREIGN KEY ("bom_id") REFERENCES "public"."bom"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "production" ADD CONSTRAINT "production_time_period_id_periods_id_fk" FOREIGN KEY ("time_period_id") REFERENCES "public"."periods"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -932,8 +956,12 @@ CREATE INDEX IF NOT EXISTS "idx_custom_constraints_right_hand_side" ON "custom_c
 CREATE INDEX IF NOT EXISTS "idx_custom_constraints_comparison_type" ON "custom_constraints" USING btree ("comparison_type");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_custom_constraints_constraint_type" ON "custom_constraints" USING btree ("constraint_type");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_demand_customer_product_inclusion" ON "demand" USING btree ("customer_id","product_id","inclusion_type");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "idx_demand_coverage_by_distance_site" ON "demand_coverage_by_distance" USING btree ("site_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "idx_distance_coverage_by_demand_site" ON "distance_coverage_by_demand" USING btree ("site_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_demand_coverage_by_distance_site" ON "demand_coverage_by_distances" USING btree ("site_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_demand_fulfillment_customer" ON "demand_fulfillment" USING btree ("customer_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_demand_fulfillment_product" ON "demand_fulfillment" USING btree ("product_id");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_demand_fulfillment_iteration" ON "demand_fulfillment" USING btree ("iteration");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_demand_fulfillment_period" ON "demand_fulfillment" USING btree ("period");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_distance_coverage_by_demand_site" ON "distance_coverage_by_demands" USING btree ("site_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_facilities_name_inclusion_type" ON "facilities" USING btree ("name","inclusion_type");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_facility_expenses_facility_type" ON "facility_expenses" USING btree ("facility_id","expense_type");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_if_condition_id" ON "indicator_constraints" USING btree ("if_condition_id");--> statement-breakpoint
@@ -976,7 +1004,6 @@ CREATE INDEX IF NOT EXISTS "idx_product_storages_inclusion_type" ON "product_sto
 CREATE INDEX IF NOT EXISTS "idx_production_label" ON "production" USING btree ("label");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_production_site" ON "production" USING btree ("site_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_production_product" ON "production" USING btree ("product_id");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "idx_production_bom" ON "production" USING btree ("bom_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_production_time_period" ON "production" USING btree ("time_period_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_production_label_no" ON "production_no" USING btree ("label");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_production_site_no" ON "production_no" USING btree ("site_id");--> statement-breakpoint

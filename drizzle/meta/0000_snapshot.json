@@ -1,5 +1,5 @@
 {
-  "id": "2a850e91-fe4f-4a31-bf60-87a097af8ea2",
+  "id": "ad1b467d-122a-43d2-948f-cdf941a699ff",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -940,7 +940,7 @@
           "name": "parameters",
           "type": "jsonb",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "time_period_id": {
           "name": "time_period_id",
@@ -1095,8 +1095,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.demand_coverage_by_distance": {
-      "name": "demand_coverage_by_distance",
+    "public.demand_coverage_by_distances": {
+      "name": "demand_coverage_by_distances",
       "schema": "",
       "columns": {
         "id": {
@@ -1161,9 +1161,9 @@
         }
       },
       "foreignKeys": {
-        "demand_coverage_by_distance_site_id_facilities_id_fk": {
-          "name": "demand_coverage_by_distance_site_id_facilities_id_fk",
-          "tableFrom": "demand_coverage_by_distance",
+        "demand_coverage_by_distances_site_id_facilities_id_fk": {
+          "name": "demand_coverage_by_distances_site_id_facilities_id_fk",
+          "tableFrom": "demand_coverage_by_distances",
           "tableTo": "facilities",
           "columnsFrom": [
             "site_id"
@@ -1178,8 +1178,196 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.distance_coverage_by_demand": {
-      "name": "distance_coverage_by_demand",
+    "public.demand_fulfillment": {
+      "name": "demand_fulfillment",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "iteration": {
+          "name": "iteration",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period": {
+          "name": "period",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "unit": {
+          "name": "unit",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "demand_min": {
+          "name": "demand_min",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "demand_max": {
+          "name": "demand_max",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "satisfied": {
+          "name": "satisfied",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "percentage": {
+          "name": "percentage",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue_per_item": {
+          "name": "revenue_per_item",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revenue_total": {
+          "name": "revenue_total",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "under_cost": {
+          "name": "under_cost",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "over_cost": {
+          "name": "over_cost",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penalty": {
+          "name": "penalty",
+          "type": "numeric(15, 2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "idx_demand_fulfillment_customer": {
+          "name": "idx_demand_fulfillment_customer",
+          "columns": [
+            {
+              "expression": "customer_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_demand_fulfillment_product": {
+          "name": "idx_demand_fulfillment_product",
+          "columns": [
+            {
+              "expression": "product_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_demand_fulfillment_iteration": {
+          "name": "idx_demand_fulfillment_iteration",
+          "columns": [
+            {
+              "expression": "iteration",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_demand_fulfillment_period": {
+          "name": "idx_demand_fulfillment_period",
+          "columns": [
+            {
+              "expression": "period",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "demand_fulfillment_customer_id_customers_id_fk": {
+          "name": "demand_fulfillment_customer_id_customers_id_fk",
+          "tableFrom": "demand_fulfillment",
+          "tableTo": "customers",
+          "columnsFrom": [
+            "customer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "demand_fulfillment_product_id_products_id_fk": {
+          "name": "demand_fulfillment_product_id_products_id_fk",
+          "tableFrom": "demand_fulfillment",
+          "tableTo": "products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.distance_coverage_by_demands": {
+      "name": "distance_coverage_by_demands",
       "schema": "",
       "columns": {
         "id": {
@@ -1244,9 +1432,9 @@
         }
       },
       "foreignKeys": {
-        "distance_coverage_by_demand_site_id_facilities_id_fk": {
-          "name": "distance_coverage_by_demand_site_id_facilities_id_fk",
-          "tableFrom": "distance_coverage_by_demand",
+        "distance_coverage_by_demands_site_id_facilities_id_fk": {
+          "name": "distance_coverage_by_demands_site_id_facilities_id_fk",
+          "tableFrom": "distance_coverage_by_demands",
           "tableTo": "facilities",
           "columnsFrom": [
             "site_id"
@@ -2332,6 +2520,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "cost_pu_pk": {
+          "name": "cost_pu_pk",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
         "cost_calculation_params": {
           "name": "cost_calculation_params",
           "type": "jsonb",
@@ -2879,19 +3074,19 @@
           "name": "label",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "source_id": {
           "name": "source_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "destination_id": {
           "name": "destination_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "vehicle_type_id": {
           "name": "vehicle_type_id",
@@ -2957,7 +3152,7 @@
           "name": "product_unit",
           "type": "varchar(50)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "down_penalty": {
           "name": "down_penalty",
@@ -3020,7 +3215,7 @@
           "name": "inclusion_type",
           "type": "varchar(10)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         }
       },
       "indexes": {
@@ -3603,12 +3798,6 @@
           "primaryKey": false,
           "notNull": true
         },
-        "bom_id": {
-          "name": "bom_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "production_cost": {
           "name": "production_cost",
           "type": "numeric(15, 2)",
@@ -3727,21 +3916,6 @@
           "method": "btree",
           "with": {}
         },
-        "idx_production_bom": {
-          "name": "idx_production_bom",
-          "columns": [
-            {
-              "expression": "bom_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
         "idx_production_time_period": {
           "name": "idx_production_time_period",
           "columns": [
@@ -3778,19 +3952,6 @@
           "tableTo": "products",
           "columnsFrom": [
             "product_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "production_bom_id_bom_id_fk": {
-          "name": "production_bom_id_bom_id_fk",
-          "tableFrom": "production",
-          "tableTo": "bom",
-          "columnsFrom": [
-            "bom_id"
           ],
           "columnsTo": [
             "id"

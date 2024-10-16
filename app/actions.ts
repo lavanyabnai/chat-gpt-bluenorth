@@ -7,8 +7,6 @@ import { kv } from '@vercel/kv'
 import { auth } from '@/auth'
 import { type Chat } from '@/lib/types'
 
-import prisma from '@/lib/prisma'
-
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
@@ -157,62 +155,3 @@ export async function getMissingKeys() {
     .filter(key => key !== '')
 }
 
-//prisma db code
-export async function getInput() {
-  const trScen = await prisma.planInput.findFirst()
-  if (!trScen) {
-    return null
-  }
-  return trScen
-}
-
-export async function getTruckInput() {
-  const trinput = await prisma.truck_scenario.findFirst()
-  if (!trinput) {
-    return null
-  }
-  return trinput
-}
-
-export async function getTruckOutputById() {
-  const truckOutput = await prisma.snop_truckoutput.findFirst({
-    select: {
-      variable_cost_trip: true,
-      fixed_cost_trip: true,
-      admin_cost_per_trip: true,
-      return_sale_trip: true,
-      variable_cost: true,
-      fixed_cost: true,
-      admin_cost: true,
-      profit_unit: true
-    }
-  })
-  return truckOutput
-}
-
-export async function createTruck(truckData: any) {
-  const createtruck = await prisma.truck_scenario.create({
-    data: truckData
-  })
-    return createtruck
-}
-
-export async function getScenarioItems() {
-    const scenarios = await prisma.snopScenario.findMany({
-      select: {
-        scenario_id: true,
-        description: true,
-        CreatedAt: true,
-        UpdatedAt: true,
-        module: true,
-        Status: true
-      }
-    });
-   const formattedScenarios = scenarios.map(scenario => ({
-     ...scenario,
-     CreatedAt: scenario.CreatedAt ? scenario.CreatedAt.toString() : null,
-     UpdatedAt: scenario.UpdatedAt ? scenario.UpdatedAt.toString() : null
-   }))
-
- return formattedScenarios
-}

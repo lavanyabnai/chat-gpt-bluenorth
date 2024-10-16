@@ -27,6 +27,11 @@ function classNames(...classes: string[]) {
 
 const navigation = [
   {
+    name: 'AI Chat',
+    to: '/chat',
+    current: true
+  },
+  {
     name: 'Master Data',
     to: '/risk/analysis',
     current: true
@@ -39,7 +44,7 @@ const navigation = [
   {
     name: 'Scenarios',
     to: '/risk/simulation',
- 
+
     current: true
   },
   {
@@ -67,12 +72,12 @@ const navigation = [
     to: '/risk/scenarioanalysis',
     current: true
   }
-]
+];
 
 export function NavigationRisk() {
   const pathname = usePathname()
   return (
-      <nav>
+      <nav >
         <div className="w-full">
           <div className="flex items-center justify-center">
             <div className="flex items-center">
@@ -82,10 +87,10 @@ export function NavigationRisk() {
                     href={item.to}
                     key={item.name}
                     className={classNames(
-                      'rounded-md px-2 py-2 text-sm font-semibold uppercase',
+                      'rounded-md px-2 py-2 text-xs font-semibold',
                       pathname === item.to
-                        ? 'bg-sky-500 text-white bg-opacity-75 border border-sky-500'
-                        : 'text-white hover:bg-sky-500 hover:text-white'
+                        ? 'bg-sky-500 text-white border border-sky-500'
+                        : 'text-primary hover:bg-sky-500 hover:text-white'
                     )}
                   >
                     {item.name}

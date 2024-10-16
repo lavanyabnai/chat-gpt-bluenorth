@@ -14,7 +14,7 @@ export default function page() {
               New
             </span>{' '}
             <span className="text-sm font-medium">
-              Flowbite is out! See what's new
+              Flowbite is out! See what&apos;s new
             </span>
             <svg
               className="ml-2 size-5"
@@ -55,8 +55,8 @@ export default function page() {
                 ></path>
               </svg>
             </Link>
-            <a
-              href="#"
+            <Link
+              href="/risk/analysis"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               <svg
@@ -68,7 +68,7 @@ export default function page() {
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
               </svg>
               Watch video
-            </a>
+            </Link>
           </div>
           <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
             <span className="font-semibold text-gray-400 uppercase">

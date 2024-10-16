@@ -6,7 +6,6 @@ import summary from './summary';
 import accounts from './accounts';
 import categories from './categories';
 import transactions from './transactions';
-
 import customers from './customers';
 import locations from './locations';
 import products from './products';

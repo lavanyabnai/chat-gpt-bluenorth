@@ -77,19 +77,15 @@ export default function Page({children}:{children:React.ReactNode}) {
 
 
   return (
-    <div className="h-full">
+    <div className="max-h-full">
       {/* <Header title="Inventory Optimizer" navigation={[]} /> */}
-      <div className="max-h-full">
-        <SidebarShadcn
+
+      {/* <SidebarShadcn
           sidebarMenu={senariomenus}
           bottomNavItems={bottomNavItems}
-        />
+        /> */}
 
-        <main className="pl-[56px] mx-4">
-          {' '}
-          {children}
-        </main>
-      </div>
+      <main className="mx-4"> {children}</main>
     </div>
   );
 }

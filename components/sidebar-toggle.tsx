@@ -17,7 +17,7 @@ export function SidebarToggle() {
       }}
     >
       <Image
-        className="mx-auto p-1"
+        className="mx-auto"
         src={logo}
         alt="logo"
         width={40}
