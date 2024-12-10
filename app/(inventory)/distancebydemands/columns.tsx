@@ -6,7 +6,7 @@ import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { distanceCoverageByDemands } from '@/db/schema';
-// import { Actions } from "./actions"
+import { Actions } from "./actions"
 
 // Define the type for a coglocation based on the schema
 type distanceCoverageByDemands = typeof distanceCoverageByDemands.$inferSelect;
@@ -34,6 +34,20 @@ export const columns: ColumnDef<distanceCoverageByDemands>[] = [
     enableSorting: false,
     enableHiding: false
   },
+  {
+    accessorKey: 'facilityName',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Site ID
+          <ArrowUpDown className="ml-2 size-4" />
+        </Button>
+      );
+    }
+  },
 
   {
     accessorKey: 'siteName',
@@ -44,7 +58,7 @@ export const columns: ColumnDef<distanceCoverageByDemands>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 size-4" />
         </Button>
       );
     }
@@ -62,11 +76,6 @@ export const columns: ColumnDef<distanceCoverageByDemands>[] = [
     header: 'Demand M3'
   },
   {
-    accessorKey: 'country',
-    header: 'Country'
-  },
-
-  {
     accessorKey: 'updatedAt',
     header: ({ column }) => {
       return (
@@ -75,7 +84,7 @@ export const columns: ColumnDef<distanceCoverageByDemands>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Updated At
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 size-4" />
         </Button>
       );
     },
@@ -89,9 +98,9 @@ export const columns: ColumnDef<distanceCoverageByDemands>[] = [
         return 'Invalid Date';
       }
     }
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => <Actions id={row.original.id.toString()} />
   }
-  // {
-  //   id: 'actions',
-  //   cell: ({ row }) => <Actions id={row.original.id.toString()} />
-  // }
 ];

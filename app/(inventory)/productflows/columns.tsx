@@ -43,7 +43,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Label
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.label,
@@ -58,7 +58,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Source
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.sourceId,
@@ -73,7 +73,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Destination
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.destinationId,
@@ -88,7 +88,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Vehicle Type
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.vehicleTypeId,
@@ -103,7 +103,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Product
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.productId,
@@ -118,7 +118,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Expand Sources
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.expandSources ? 'Yes' : 'No',
@@ -133,7 +133,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Expand Destinations
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.expandDestinations ? 'Yes' : 'No',
@@ -148,7 +148,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Expand Products
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.expandProducts ? 'Yes' : 'No',
@@ -163,7 +163,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Min Throughput
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.minThroughput,
@@ -178,7 +178,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Max Throughput
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.maxThroughput,
@@ -193,7 +193,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Fixed
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.fixed ? 'Yes' : 'No',
@@ -208,7 +208,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Fixed Value
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.fixedValue,
@@ -223,7 +223,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Product Unit
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.productUnit,
@@ -238,7 +238,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Down Penalty
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.downPenalty,
@@ -253,7 +253,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Up Penalty
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.upPenalty,
@@ -268,7 +268,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Currency
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.currency,
@@ -283,7 +283,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Distance Limit
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.distanceLimit,
@@ -298,7 +298,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Distance Unit
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.distanceUnit,
@@ -313,7 +313,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Time Limit
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.timeLimit,
@@ -328,7 +328,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Time Unit
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.timeUnit,
@@ -343,7 +343,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Time Period
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.timePeriodId,
@@ -358,7 +358,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Expand Periods
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.expandPeriods ? 'Yes' : 'No',
@@ -373,7 +373,7 @@ export const columns: ColumnDef<productFlows>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Inclusion Type
-        <ArrowUpDown className="ml-2 h-4 w-4" />
+        <ArrowUpDown className="ml-2 size-4" />
       </Button>
     ),
     cell: ({ row }) => row.original.inclusionType,

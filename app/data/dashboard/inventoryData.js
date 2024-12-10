@@ -1,11 +1,11 @@
 // import WrapperGrid from '~/kendo/grid/WrapperGrid'
-import {carData} from "~/data/dashboard/carData.js";
-import WrapperMultiAreaChart from '~/kendo/charts/area/WrapperAreaChart';
-import WrapperMultiLineChart from '~/kendo/charts/line/WrapperLineChart';
-import WrapperMultiBarChart from '~/kendo/charts/bar/WrapperBarChart';
-import WrapperPieChart from  '~/kendo/charts/pie/WrapperPieChart'
+// import {carData} from "@/data/dashboard/carData.js";
+import WrapperMultiAreaChart from '@/app/kendo/charts/area/WrapperAreaChart';
+import WrapperMultiLineChart from '@/app/kendo/charts/line/WrapperLineChart';
+import WrapperMultiBarChart from '@/app/kendo/charts/bar/WrapperBarChart';
+import WrapperPieChart from  '@/app/kendo/charts/pie/WrapperPieChart'
 
-import {handbalance_m,avgInventoryCategories_m,avgInventorySeries_m,mapeCategories_m,mapeSeries_m,unitCategories_m,unitSeries_m,resourceCategories_m,resourceSeries_m,overheadCategories_m,overheadSeries_m,materialCategories_m,materialSeries_m,turnsCategories_m,turnsSeries_m} from '~/kendo/rawData/dashboard/inventoryDashboard'
+import {handbalance_m,avgInventoryCategories_m,avgInventorySeries_m,mapeCategories_m,mapeSeries_m,unitCategories_m,unitSeries_m,resourceCategories_m,resourceSeries_m,overheadCategories_m,overheadSeries_m,materialCategories_m,materialSeries_m,turnsCategories_m,turnsSeries_m} from '@/app/kendo/rawData/dashboard/inventoryDashboard'
 
 export const reviewTabs = [
   { name: 'Month', href: '#', current: true },

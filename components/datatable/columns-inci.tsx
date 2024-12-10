@@ -124,7 +124,7 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className={`flex w-[150px] items-center ${status.textClr}`}>
           {status.icon ? (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+            <status.icon className="mr-2 size-4 text-muted-foreground" />
           ) : null}
           <span className="text-base font-semibold">{status.label}</span>
         </div>
@@ -167,7 +167,7 @@ export const columns: ColumnDef<Task>[] = [
         <div className="flex w-[80px] items-center">
           {status && (
             <svg
-              className={`${status.fill} mr-2 h-2 w-2`}
+              className={`${status.fill} mr-2 size-2`}
               viewBox="0 0 6 6"
               aria-hidden="true"
             >

@@ -6,72 +6,118 @@ import {
   CircleIcon,
   CrossCircledIcon,
   QuestionMarkCircledIcon,
-  StopwatchIcon,
-} from "@radix-ui/react-icons"
+  StopwatchIcon
+} from '@radix-ui/react-icons';
+import { Value } from '@radix-ui/react-select';
 
+export const dot = [
+  {
+    value: 'Low',
+    label: 'Low',
+    icon: QuestionMarkCircledIcon,
+    fill: 'fill-green-500',
+    color: 'bg-green-100',
+    textClr: 'text-rose-800'
+  },
+
+  {
+    value: 'Medium',
+    label: 'Medium',
+    icon: CircleIcon,
+    fill: 'fill-yellow-500',
+    color: 'bg-yellow-500',
+    textClr: 'text-rose-800'
+  },
+  {
+    value: 'High',
+    label: 'High',
+    icon: CheckCircledIcon,
+    fill: 'fill-red-500',
+    color: 'bg-rose-100',
+    textClr: 'text-rose-800'
+  }
+];
 export const labels = [
   {
-    value: "Logistics",
-    label: "Logistics",
-    color: "bg-blue-100",
-  textClr: "text-blue-800"
+    value: 'Inventory',
+    label: 'Inventory',
+    color: 'bg-fuchsia-100',
+    textClr: 'text-fuchsia-700'
   },
   {
-    value: "Demand-Planning",
-    label: "Demand Planning",
-    color: "bg-green-100",
-    textClr: "text-green-800"
+    value: 'Logistics',
+    label: 'Logistics',
+    color: 'bg-indigo-100',
+    textClr: 'text-indigo-700'
   },
   {
-    value: "Inventory",
-    label: "Inventory",
-    color: "bg-rose-100",
-    textClr: "text-rose-800"
+    value: 'Demand Planning',
+    label: 'Demand Planning',
+    color: 'bg-violet-200',
+    textClr: 'text-violet-800'
   },
+
+  {
+    value: 'Warehousing',
+    label: 'Warehousing',
+    color: 'bg-gray-100',
+    textClr: 'text-gray-700'
+  },
+  {
+    value: 'Sourcing',
+    label: 'Sourcing',
+    color: 'bg-sky-100',
+    textClr: 'text-sky-700'
+  }
 ];
 
 export const statuses = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: 'backlog',
+    label: 'Backlog',
     icon: QuestionMarkCircledIcon,
+    textClr: 'text-red-500'
   },
   {
-    value: "todo",
-    label: "Todo",
+    value: 'todo',
+    label: 'Pending',
     icon: CircleIcon,
+    textClr: 'text-indigo-500'
   },
   {
-    value: "in progress",
-    label: "In Progress",
+    value: 'in progress',
+    label: 'In Progress',
     icon: StopwatchIcon,
+    textClr: 'text-orange-400'
   },
   {
-    value: "done",
-    label: "Done",
+    value: 'done',
+    label: 'Resolved',
     icon: CheckCircledIcon,
+    textClr: 'text-green-800'
   },
   {
-    value: "canceled",
-    label: "Canceled",
+    value: 'canceled',
+    label: 'Canceled',
     icon: CrossCircledIcon,
-  },
-]
+    textClr: 'text-slate-500'
+  }
+];
 
 export const priorities = [
   {
-    label: "Low",
-    value: "low",
-    icon: ArrowDownIcon,
+    label: 'Low',
+    value: 'low',
+    icon: ArrowDownIcon
   },
   {
-    label: "Medium",
-    value: "medium",
-    icon: ArrowRightIcon,
+    label: 'Medium',
+    value: 'medium',
+    icon: ArrowRightIcon
   },
   {
-    label: "High",
-    value: "high",
-    icon: ArrowUpIcon,
-  },
-]
+    label: 'High',
+    value: 'high',
+    icon: ArrowUpIcon
+  }
+];

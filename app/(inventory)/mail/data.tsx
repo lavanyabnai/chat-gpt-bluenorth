@@ -9,7 +9,7 @@ import PeriodsPage from '@/app/(inventory)/periods/page';
 import VehicleTypesPage from '@/app/(inventory)/vehicleTypes/page';
 import CogLocationsPage from '@/app/(inventory)/coglocations/page';
 import DemandByDistancePage from '@/app/(inventory)/demandfulfillment/page';
-import DistanceByDemandPage from '@/app/(inventory)/distancebydemand/page';
+// import DistanceByDemandPage from '@/app/(inventory)/distancebydemands/page';
 import ProductFlowsPage from '@/app/(inventory)/productflows/page';
 
 export const allTables = [
@@ -41,7 +41,7 @@ export const allTables = [
     email: 'williamsmith@example.com',
     subject: 'Meeting Tomorrow',
     text: 'A customer is the final destination point of every product shipped from a DC / factory. Use this table to define the customers consuming the products of your supply chain.',
-    dataTable: <DistanceByDemandPage />,
+    dataTable: <CogLocationsPage />,
     date: '2023-10-22T09:00:00',
     read: true,
     labels: ['NET', 'SIM']

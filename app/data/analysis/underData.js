@@ -1,8 +1,8 @@
-import WrapperMultiColumnChart from '~/kendo/charts/column/WrapperColumnChart'
-import WrapperMultiLineChart from '~/kendo/charts/Line/WrapperLineChart'
-import WrapperMultiStackColChart from '~/kendo/charts/stackcol/WrapperStackColChart'
+// import WrapperMultiColumnChart from '@/app/kendo/charts/column/WrapperColumnChart'
+// import WrapperMultiLineChart from '@/app/kendo/charts/line/WrapperLineChart'
+import WrapperMultiStackColChart from '@/app/kendo/charts/stackcol/WrapperStackColChart'
 
-import { discountproductCategories_m,discountproductSeries_m,cancellationCategories_m,cancellationSeries_m} from '~/kendo/rawData/analysis/underAnalysis'
+import { discountproductCategories_m,discountproductSeries_m,cancellationCategories_m,cancellationSeries_m} from '@/app/kendo/rawData/analysis/underAnalysis'
 
 
 export const reviewTabs = [

@@ -43,18 +43,19 @@ function DemoContainer({
   )
 }
 
-export function SnopForm({ getInput }) {
+export function SnopForm() {
+// export function SnopForm({ getInput }) {
   
   const [date, setDate] = React.useState<Date>(new Date())
   const [inputData, setInputData] = React.useState({})
 
-  useEffect(() => {
-    const fetchInputData = async () => {
-      const data = await getInput()
-      setInputData(data)
-    }
-    fetchInputData()
-  }, [getInput]) // Ensure useEffect runs only once on component mount
+  // useEffect(() => {
+  //   const fetchInputData = async () => {
+  //     const data = await getInput()
+  //     setInputData(data)
+  //   }
+  //   fetchInputData()
+  // }, [getInput]) // Ensure useEffect runs only once on component mount
 
   return (
     <div className="m-2">

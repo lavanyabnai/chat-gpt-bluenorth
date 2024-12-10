@@ -7,14 +7,13 @@ export const useGetProductFlows = () => {
     queryKey: ['productflows'],
     queryFn: async () => {
       const response = await client.api.productflows.$get();
-      // const response = await fetch('/api/distancebydemands', {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   }
-      // });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch productflows');
+      }
 
       const { data } = await response.json();
+
       return data;
     }
   });

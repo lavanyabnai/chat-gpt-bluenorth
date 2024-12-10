@@ -8,8 +8,8 @@ import React, {
   useRef,
 } from 'react'
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react' // AG Grid Component
-
-import { CellClassParams, ValueGetterParams, ValueParserParams } from 'ag-grid-enterprise'
+import { generatedAccuracyData } from '@/app/data/agGrid/snop/demand/forecastAccuracy.js';
+import { CellClassParams, CellClassRules, ValueGetterParams, ValueParserParams } from 'ag-grid-enterprise'
 
 
 

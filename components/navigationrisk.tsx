@@ -32,24 +32,23 @@ const navigation = [
     current: true
   },
   {
-    name: 'Master Data',
-    to: '/risk/analysis',
+    name: 'Dashboard',
+    to: '/header/dashboard',
     current: true
   },
   {
-    name: 'Output',
-    to: '/risk/output',
+    name: 'Network',
+    to: '/header/netsim',
     current: true
   },
   {
-    name: 'Scenarios',
-    to: '/risk/simulation',
-
+    name: 'Events',
+    to: '/header/events',
     current: true
   },
   {
-    name: 'Optimization',
-    to: '/risk/optimization',
+    name: 'Planning',
+    to: '/header/planning',
     current: true
   },
   {
@@ -62,16 +61,33 @@ const navigation = [
     to: '/risk/flowchart',
     current: true
   },
-  {
-    name: 'Comparing',
-    to: '/risk/comparing',
-    current: true
-  },
+
   {
     name: 'Scenario Analysis',
     to: '/risk/scenarioanalysis',
     current: true
   }
+  // {
+  //   name: 'Comparing',
+  //   to: '/risk/comparing',
+  //   current: true
+  // },
+  // {
+  //   name: 'Output',
+  //   to: '/risk/output',
+  //   current: true
+  // },
+  // {
+  //   name: 'Scenarios',
+  //   to: '/risk/simulation',
+
+  //   current: true
+  // },
+  // {
+  //   name: 'Optimization',
+  //   to: '/risk/optimization',
+  //   current: true
+  // },
 ];
 
 export function NavigationRisk() {

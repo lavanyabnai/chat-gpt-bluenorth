@@ -1,15 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useGetProductFlows } from '@/features/productflows/api/use-get-productflows';
+import { useState } from 'react';
 
 import { DataTable } from '@/components/data-table';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useGetProductFlows } from '@/features/productflows/api/use-get-productflows';
 
 import { columns } from './columns';
-import { Separator } from '@/components/ui/separator';
 import { ImportCard } from '../customers/import-card';
 
 enum VARIANTS {
@@ -80,11 +80,10 @@ export default function ProductFlowsPage() {
       </div>
     );
   }
-
   if (variant === VARIANTS.IMPORT) {
-    function onSubmitImport(data: any): void {
+    const onSubmitImport = (data: any): void => {
       throw new Error('Function not implemented.');
-    }
+    };
 
     return (
       <>
@@ -121,7 +120,7 @@ export default function ProductFlowsPage() {
         <DataTable
           filterKey="name"
           columns={columns}
-          data={productflowQuery.data}
+          data={productflowQuery.data ?? []}
           // onDelete={(row) => {
           //     const ids = row.map((r) => r.original.id);
           //     deletecoglocation.mutate({ ids });

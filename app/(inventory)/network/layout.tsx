@@ -1,4 +1,4 @@
-import Header from '@/components/header';
+import { Header } from '@/components/header';
 import SidebarShadcn from '@/components/SidebarShadcn';
 // import SidebarDemo from '@/components/SidebarDemo';
 
@@ -74,7 +74,7 @@ export default function Page({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-full">
-      <Header title="Inventory Optimizer" navigation={navigation} />
+      {/* <Header title="Inventory Optimizer" navigation={navigation} /> */}
       <div className="flex max-h-full">
         <SidebarShadcn
           sidebarMenu={senariomenus}

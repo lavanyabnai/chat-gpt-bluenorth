@@ -8,7 +8,7 @@ export const useGetProductFlow = (id?: string) => {
     queryKey: ['productflow', { id }],
     queryFn: async () => {
       const response = await client.api.productflows[':id'].$get({
-        param: { id }
+        param: { id: id || '' }
       });
 
       if (!response.ok) {
